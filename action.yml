@@ -1,11 +1,11 @@
 name: Robotframework
 author: SWAG
-description: Run automation tests
+description: Runs Robotframework
 icon: activity
 color: yellow
 inputs:
   testsuites:
-    description: Direct of tests to run
+    description: Directory of testsuites to run
     required: true
     default: testsuites
   variables:
