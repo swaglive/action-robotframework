@@ -30,13 +30,10 @@ jobs:
 
     - name: Setup Environment - Pull docker layers
       run: |
-        cat << EOF > images.txt
+        parallel docker pull ::: \
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} \
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.repository.default_branch }}
-        EOF
-        echo ${{ steps.meta.outputs.tags }} >> images.txt
-        cat images.txt
-        parallel docker pull < images.txt || true
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.repository.default_branch }} \
+        || true
 
     - name: Build - Docker
       uses: docker/build-push-action@v2
@@ -48,7 +45,6 @@ jobs:
         build-args: |
           BUILDKIT_INLINE_CACHE=1
         cache-from: |
-          ${{ steps.meta.outputs.tags }}
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.repository.default_branch }}
 
