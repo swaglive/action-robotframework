@@ -42,7 +42,7 @@ jobs:
     needs:
     - build-docker
     env:
-      ENV_GITHUB_REF: ${{ github.env.GITHUB_REF }}
+      ENV_GITHUB_REF: ${{ github.ref }}
 
     steps:
     - name: Setup Environment - Set variable `check-if-prelease`
@@ -52,12 +52,12 @@ jobs:
         text: ${{ env.GITHUB_REF }}
         regex: ^refs/tags/v?[0-9]+\.[0-9]+\.[0-9]+\-.*$
 
-    - run:
-        echo $ENV_GITHUB_REF
+    - run: |
+        env
         echo ${{ steps.check-if-prelease.outputs.match != '' }}
 
   create-release:
-    if: "contains(github.env.GITHUB_REF, 'refs/tags/')"
+    if: "contains(github.ref, 'refs/tags/')"
     runs-on: ubuntu-latest
     needs:
     - build-docker
