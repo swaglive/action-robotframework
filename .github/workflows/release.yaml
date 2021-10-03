@@ -31,6 +31,7 @@ jobs:
     - name: Setup Environment - Pull docker layers
       run: |
         parallel docker pull ::: \
+          ${{ steps.meta.outputs.tags }} \
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} \
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.repository.default_branch }} \
         || true
@@ -45,6 +46,7 @@ jobs:
         build-args: |
           BUILDKIT_INLINE_CACHE=1
         cache-from: |
+          ${{ steps.meta.outputs.tags }}
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.repository.default_branch }}
 
