@@ -3,7 +3,7 @@ Usage
 
 ```yaml
 - name: robotframework
-  uses: swaglive/robotframework-action@master
+  uses: swaglive/action-robotframework@master
   with:
     testsuites: testsuites/
     variables: variables.yaml
