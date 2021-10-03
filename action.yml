@@ -1,8 +1,8 @@
 name: Robotframework
-author: SWAG
 description: Runs Robotframework
-icon: activity
-color: yellow
+branding:
+  icon: activity
+  color: yellow
 inputs:
   testsuites:
     description: Directory of testsuites to run
