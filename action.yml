@@ -1,6 +1,8 @@
 name: Robotframework
 author: SWAG
 description: Run automation tests
+icon: activity
+color: yellow
 inputs:
   testsuites:
     description: Direct of tests to run
@@ -11,7 +13,7 @@ inputs:
     required: true
 runs:
   using: docker
-  image: docker://ghcr.io/robotframework-action:v0.2.1
+  image: docker://ghcr.io/swaglive/robotframework:v4.1
   entrypoint: robot
   args:
   - -V
