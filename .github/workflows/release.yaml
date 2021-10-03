@@ -59,4 +59,4 @@ jobs:
       with:
         prerelease: ${{ steps.check-if-prelease.outputs.match != '' }}
         fail_on_unmatched_files: true
-        discussion_category_name: Releases
+        discussion_category_name: Announcements
